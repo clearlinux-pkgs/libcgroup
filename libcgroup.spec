@@ -4,7 +4,7 @@
 #
 Name     : libcgroup
 Version  : 0.41
-Release  : 14
+Release  : 15
 URL      : http://downloads.sourceforge.net/libcg/libcgroup-0.41.tar.bz2
 Source0  : http://downloads.sourceforge.net/libcg/libcgroup-0.41.tar.bz2
 Summary  : Tools and libraries to control and monitor control groups
