@@ -4,9 +4,9 @@
 #
 Name     : libcgroup
 Version  : 0.41
-Release  : 19
-URL      : http://downloads.sourceforge.net/libcg/libcgroup-0.41.tar.bz2
-Source0  : http://downloads.sourceforge.net/libcg/libcgroup-0.41.tar.bz2
+Release  : 20
+URL      : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
+Source0  : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 Summary  : Tools and libraries to control and monitor control groups
 Group    : Development/Tools
 License  : LGPL-2.0+ LGPL-2.1 LGPL-2.1+
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1539670647
+export SOURCE_DATE_EPOCH=1545264732
 export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -94,7 +94,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1539670647
+export SOURCE_DATE_EPOCH=1545264732
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libcgroup
 cp COPYING %{buildroot}/usr/share/package-licenses/libcgroup/COPYING

@@ -1,5 +1,5 @@
 PKG_NAME := libcgroup
-URL = http://downloads.sourceforge.net/libcg/libcgroup-0.41.tar.bz2
+URL = https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 ARCHIVES = 
 
 include ../common/Makefile.common
