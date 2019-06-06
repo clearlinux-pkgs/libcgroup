@@ -4,10 +4,10 @@
 #
 Name     : libcgroup
 Version  : 0.41
-Release  : 20
+Release  : 21
 URL      : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 Source0  : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
-Summary  : Tools and libraries to control and monitor control groups
+Summary  : Library that abstracts the control group file system in Linux
 Group    : Development/Tools
 License  : LGPL-2.0+ LGPL-2.1 LGPL-2.1+
 Requires: libcgroup-bin = %{version}-%{release}
@@ -27,7 +27,6 @@ administrate and monitor control groups and the associated controllers.
 Summary: bin components for the libcgroup package.
 Group: Binaries
 Requires: libcgroup-license = %{version}-%{release}
-Requires: libcgroup-man = %{version}-%{release}
 
 %description bin
 bin components for the libcgroup package.
@@ -39,6 +38,8 @@ Group: Development
 Requires: libcgroup-lib = %{version}-%{release}
 Requires: libcgroup-bin = %{version}-%{release}
 Provides: libcgroup-devel = %{version}-%{release}
+Requires: libcgroup = %{version}-%{release}
+Requires: libcgroup = %{version}-%{release}
 
 %description dev
 dev components for the libcgroup package.
@@ -78,11 +79,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1545264732
-export CFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FCFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export FFLAGS="$CFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
-export CXXFLAGS="$CXXFLAGS -fstack-protector-strong -mzero-caller-saved-regs=used "
+export SOURCE_DATE_EPOCH=1559831688
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export FCFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export FFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export CXXFLAGS="$CXXFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -94,7 +98,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1545264732
+export SOURCE_DATE_EPOCH=1559831688
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libcgroup
 cp COPYING %{buildroot}/usr/share/package-licenses/libcgroup/COPYING
