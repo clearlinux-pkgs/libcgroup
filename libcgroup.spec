@@ -4,10 +4,10 @@
 #
 Name     : libcgroup
 Version  : 0.41
-Release  : 21
+Release  : 22
 URL      : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 Source0  : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
-Summary  : Library that abstracts the control group file system in Linux
+Summary  : Tools and libraries to control and monitor control groups
 Group    : Development/Tools
 License  : LGPL-2.0+ LGPL-2.1 LGPL-2.1+
 Requires: libcgroup-bin = %{version}-%{release}
@@ -38,7 +38,6 @@ Group: Development
 Requires: libcgroup-lib = %{version}-%{release}
 Requires: libcgroup-bin = %{version}-%{release}
 Provides: libcgroup-devel = %{version}-%{release}
-Requires: libcgroup = %{version}-%{release}
 Requires: libcgroup = %{version}-%{release}
 
 %description dev
@@ -72,36 +71,31 @@ man components for the libcgroup package.
 
 %prep
 %setup -q -n libcgroup-0.41
+cd %{_builddir}/libcgroup-0.41
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559831688
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1587404396
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FCFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export FFLAGS="$CFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
-export CXXFLAGS="$CXXFLAGS -O3 -fcf-protection=full -ffat-lto-objects -flto=4 -fstack-protector-strong "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
-%check
-export LANG=C
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
-
 %install
-export SOURCE_DATE_EPOCH=1559831688
+export SOURCE_DATE_EPOCH=1587404396
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libcgroup
-cp COPYING %{buildroot}/usr/share/package-licenses/libcgroup/COPYING
+cp %{_builddir}/libcgroup-0.41/COPYING %{buildroot}/usr/share/package-licenses/libcgroup/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 %make_install
 
 %files
@@ -124,7 +118,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libcgroup/COPYING
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/libcgroup.h
 /usr/include/libcgroup/config.h
 /usr/include/libcgroup/error.h
 /usr/include/libcgroup/groups.h
@@ -145,7 +139,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/libcgroup/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libcgroup/COPYING
+/usr/share/package-licenses/libcgroup/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 
 %files man
 %defattr(0644,root,root,0755)
