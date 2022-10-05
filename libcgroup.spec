@@ -4,12 +4,12 @@
 #
 Name     : libcgroup
 Version  : 0.41
-Release  : 23
+Release  : 24
 URL      : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 Source0  : https://sourceforge.net/projects/libcg/files/libcgroup/v0.41/libcgroup-0.41.tar.bz2
 Summary  : Tools and libraries to control and monitor control groups
 Group    : Development/Tools
-License  : LGPL-2.0+ LGPL-2.1 LGPL-2.1+
+License  : LGPL-2.0+ LGPL-2.1
 Requires: libcgroup-bin = %{version}-%{release}
 Requires: libcgroup-lib = %{version}-%{release}
 Requires: libcgroup-license = %{version}-%{release}
@@ -79,23 +79,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587404396
+export SOURCE_DATE_EPOCH=1664934443
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1587404396
+export SOURCE_DATE_EPOCH=1664934443
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libcgroup
-cp %{_builddir}/libcgroup-0.41/COPYING %{buildroot}/usr/share/package-licenses/libcgroup/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/libcgroup-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libcgroup/9a1929f4700d2407c70b507b3b2aaf6226a9543c || :
 %make_install
 
 %files
